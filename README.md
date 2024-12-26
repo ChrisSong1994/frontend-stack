@@ -1,2 +1,3 @@
-# frontend-stack
-一个前端知识总结站点
+# FRONTEND STACK
+
+前端知识体系站点
