@@ -2,6 +2,6 @@
 
 export default {
   output: {
-    assetPrefix: "./",
+    assetPrefix: "auto",
   },
 };
