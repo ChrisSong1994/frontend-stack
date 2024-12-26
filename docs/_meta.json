@@ -1,37 +1,37 @@
 [
   {
     "text": "导航",
-    "link": "/navigator",
+    "link": "./navigator",
     "activeMatch": "/navigator"
   },
   {
     "text": "前端基础",
-    "link": "/frontend-base",
+    "link": "./frontend-base",
     "activeMatch": "/frontend-base"
   },
   {
     "text": "工程化",
-    "link": "/enginering/",
-    "activeMatch": "/enginering/"
+    "link": "./enginering",
+    "activeMatch": "/enginering"
   },
   {
     "text": "Nodejs",
-    "link": "/nodejs/",
-    "activeMatch": "/nodejs/"
+    "link": "./nodejs",
+    "activeMatch": "/nodejs"
   },
   {
     "text": "浏览器",
-    "link": "/browser/",
-    "activeMatch": "/browser/"
+    "link": "./browser",
+    "activeMatch": "/browser"
   },
   {
     "text": "跨端",
-    "link": "/cross-platform/",
-    "activeMatch": "/cross-platform/"
+    "link": "./cross-platform",
+    "activeMatch": "/cross-platform"
   },
   {
     "text": "网络",
-    "link": "/network/",
-    "activeMatch": "/network/"
+    "link": "./network",
+    "activeMatch": "/network"
   }
 ]

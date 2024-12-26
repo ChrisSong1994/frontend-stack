@@ -7,6 +7,7 @@ export default defineConfig({
   title: "FRONTEND STACK",
   icon: "/logo.icon.png",
   logo: "/logo.jpeg",
+  base: '/frontend-stack/',
   logoText: "Frontend Stack",
   builderConfig: builderConfig,
   themeConfig: {
