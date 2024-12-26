@@ -15,6 +15,9 @@ export default defineConfig({
       assetPrefix: BASE_PATH,
     },
   },
+  route: {
+    cleanUrls: true,
+  },
   ssg: false,
   themeConfig: {
     socialLinks: [
