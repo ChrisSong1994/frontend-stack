@@ -1,13 +1,14 @@
 import * as path from "node:path";
 import { defineConfig } from "rspress/config";
+import builderConfig from "./builder.config";
 
 export default defineConfig({
   root: path.join(__dirname, "docs"),
-  // lang: "zh",
   title: "FRONTEND STACK",
   icon: "/logo.icon.png",
   logo: "/logo.jpeg",
   logoText: "Frontend Stack",
+  builderConfig: builderConfig,
   themeConfig: {
     socialLinks: [
       {
