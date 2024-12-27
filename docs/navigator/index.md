@@ -8,10 +8,12 @@
 
 
 ## 基础文档站点
-
+- [web.dev](https://web.developers.google.cn/?hl=zh-cn): google 官方web 开发站点： 构建可在任何浏览器上运行的现代 Web 体验的指南。
 - [MDN](https://developer.mozilla.org/zh-CN/): MDN 是 Mozilla 的开发者文档网站，提供了有关 Web 开发、JavaScript、CSS、HTML、DOM 和 Web 标准的信息。
 - [W3School](https://www.w3school.com.cn/): W3School 是一个在线学习网站，提供了有关 HTML、CSS、JavaScript、SQL、PHP、Python 等编程语言的信息。
 - [ECMAScript 6 入门](https://es6.ruanyifeng.com/): ECMAScript 6 入门是一本开源的 JavaScript 语言教程，全面介绍 ECMAScript 6 新增的语法特性。
+- [谷歌搜索中心](https://developers.google.com/search?hl=zh-cn): 谷歌搜索中心
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools?hl=zh-cn): Chrome 开发者工具
 
 ## 前端库 UI
 

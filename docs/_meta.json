@@ -17,7 +17,17 @@
   {
     "text": "工程化",
     "link": "./enginering",
-    "activeMatch": "/enginering"
+    "activeMatch": "/enginering",
+    "items": [
+      {
+        "text": "Babel",
+        "link": "./enginering/babel"
+      },
+      {
+        "text": "Npm",
+        "link": "./enginering/npm"
+      }
+    ]
   },
   {
     "text": "Nodejs",
@@ -38,5 +48,10 @@
     "text": "网络",
     "link": "./network",
     "activeMatch": "/network"
+  },
+  {
+    "text": "解决方案",
+    "link": "./solution",
+    "activeMatch": "/solution"
   }
 ]

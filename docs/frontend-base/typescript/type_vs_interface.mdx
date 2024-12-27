@@ -1,1 +1,133 @@
 # Type 对比 Interface
+
+在 TypeScript 中，`type` 和 `interface` 都是用于定义类型的关键字，但它们之间存在一些关键性的区别。理解这些差异可以帮助开发者根据具体需求选择最合适的方式。以下是 `type` 和 `interface` 的详细对比：
+
+### 定义方式与适用范围
+
+- **`type`**:
+  - 可以用来定义基本类型别名、联合类型、交叉类型、元组等复杂类型。
+  - 适用于更广泛的场景，包括但不限于对象类型、函数类型、原始类型等。
+  - 示例：
+    ```typescript
+    type StringOrNumber = string | number;
+    type Point = [number, number];
+    ```
+
+- **`interface`**:
+  - 主要用于定义对象的形状（属性和方法），类似于传统面向对象编程中的接口概念。
+  - 更适合描述对象的结构，特别是在需要利用接口的扩展和合并功能时。
+  - 示例：
+    ```typescript
+    interface User {
+      id: number;
+      name: string;
+    }
+    ```
+
+### 扩展与合并
+
+- **`interface`**:
+  - 支持通过 `extends` 关键字扩展其他接口或类型，允许组合多个类型的特性。
+  - 同名的接口会自动合并，即使分布在不同的文件中，这有助于构建层次化的类型结构。
+  - 示例：
+    ```typescript
+    interface Animal {
+      name: string;
+    }
+
+    interface Animal {
+      sound(): void;
+    }
+
+    // 等价于：
+    interface Animal {
+      name: string;
+      sound(): void;
+    }
+    ```
+
+- **`type`**:
+  - 不支持直接扩展，虽然可以通过交叉类型 (`&`) 来模拟类似的行为。
+  - 同名的类型不会自动合并，而是会导致编译错误，因此每个 `type` 定义必须是唯一的。
+  - 示例：
+    ```typescript
+    type Animal = {
+      name: string;
+    };
+
+    type Animal = {
+      sound(): void;
+    }; // 错误：重复定义
+    ```
+
+### 可选属性和只读属性
+
+- **`interface`** 和 **`type`**:
+  - 都可以定义可选属性（使用 `?`）和只读属性（使用 `readonly`），为对象提供灵活性。
+  - 示例：
+    ```typescript
+    interface User {
+      readonly id: number;
+      name?: string;
+    }
+
+    type User = {
+      readonly id: number;
+      name?: string;
+    };
+    ```
+
+### 函数类型和类类型
+
+- **`interface`**:
+  - 可以定义函数签名和类的静态部分（构造函数），这对于实现某些设计模式非常有用。
+  - 示例：
+    ```typescript
+    interface SearchFunc {
+      (source: string, subString: string): boolean;
+    }
+
+    interface ClockConstructor {
+      new (hour: number, minute: number);
+    }
+    ```
+
+- **`type`**:
+  - 同样可以定义函数类型和类类型，但在某些情况下可能更简洁，尤其是在定义简单的函数签名时。
+  - 示例：
+    ```typescript
+    type SearchFunc = (source: string, subString: string) => boolean;
+
+    type ClockConstructor = new (hour: number, minute: number) => Clock;
+    ```
+
+### 泛型
+
+- **`interface`** 和 **`type`**:
+  - 都支持泛型参数，使得定义的类型更加通用和灵活。
+  - 示例：
+    ```typescript
+    interface Box<T> {
+      value: T;
+    }
+
+    type Box<T> = {
+      value: T;
+    };
+    ```
+
+### 使用场景推荐
+
+- **`interface`**:
+  - 更适合描述对象的形状，特别是当你需要利用接口的扩展和合并功能时。
+  - 在声明库 API 或大型项目时，接口通常更受欢迎，因为它更符合面向对象编程的习惯。
+
+- **`type`**:
+  - 更加灵活，适用于定义复杂的类型结构，如联合类型、交叉类型等。
+  - 当你需要定义一个临时类型或不打算扩展它时，`type` 是一个不错的选择。
+
+### 总结
+
+- 如果你只是定义对象的形状，并且可能会有扩展需求，推荐使用 `interface`。
+- 如果你需要定义复杂的类型结构，或者不想让类型被扩展或合并，那么 `type` 是更好的选择。
+- 在实际开发中，两者都可以根据个人偏好和具体场景互换使用，但保持一致性有助于代码的可读性和维护性。
