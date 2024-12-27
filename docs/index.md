@@ -4,7 +4,7 @@ pageType: home
 hero:
   name: Frontend Stack
   text: 一个前端知识体系站点
-  tagline: 化散为整，让知识变的清晰明朗（该站纯由站长手工整理）
+  tagline: 化散为整，让知识变的清晰明朗
   actions:
     - theme: brand
       text: 开始吧

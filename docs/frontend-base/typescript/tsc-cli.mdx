@@ -1,0 +1,146 @@
+# tsx 命令
+
+`tsc` 是 TypeScript 编译器的命令行接口（CLI），用于将 TypeScript 代码编译成 JavaScript 代码。它提供了丰富的选项来控制编译过程，包括指定输入文件、配置输出路径、启用增量编译等。以下是 `tsc` CLI 的详细解析：
+
+### 基本用法
+
+```bash
+tsc [options] [file ...]
+```
+
+- **`[file ...]`**: 指定要编译的一个或多个文件。如果省略，则默认使用 `tsconfig.json` 中的配置。
+- **`[options]`**: 提供各种编译选项。
+
+### 常见选项
+
+#### 文件和目录
+
+- **`--project <path>` 或 `-p <path>`**:
+  - 指定包含 `tsconfig.json` 文件的项目目录。如果没有提供路径，默认为当前工作目录。
+- **`--outFile <file>`**:
+
+  - 将所有全局作用域中的代码合并成一个文件。适用于某些模块类型，如 AMD 和 SystemJS。
+
+- **`--outDir <directory>`**:
+
+  - 指定输出文件夹的位置。与 `tsconfig.json` 中的 `compilerOptions.outDir` 相同。
+
+- **`--listFiles`**:
+  - 打印出将会被编译的文件列表，但不执行编译。
+
+#### 编译行为
+
+- **`--watch` 或 `-w`**:
+
+  - 启动监视模式，监听文件变化并自动重新编译。
+
+- **`--build` 或 `-b`**:
+
+  - 构建项目及其依赖项，支持多项目构建（通过 `tsconfig.json` 中的 `references` 字段）。
+
+- **`--incremental`**:
+
+  - 启用增量编译，仅重新编译自上次成功编译以来发生变化的文件。需要配合 `tsconfig.json` 中的相关设置。
+
+- **`--clean`**:
+
+  - 删除之前增量编译生成的所有 `.tsbuildinfo` 文件。
+
+- **`--emitDeclarationOnly`**:
+
+  - 只生成声明文件而不编译 TypeScript 到 JavaScript。
+
+- **`--noEmit`**:
+  - 禁止生成任何输出文件，通常用于检查代码而不想生成新的文件时。
+
+#### 输出和调试
+
+- **`--declaration`**:
+
+  - 生成相应的 `.d.ts` 声明文件。等效于在 `tsconfig.json` 中设置 `compilerOptions.declaration`。
+
+- **`--sourceMap`** 或 `-s`:
+
+  - 生成源映射文件以帮助调试。等效于 `compilerOptions.sourceMap`。
+
+- **`--pretty`**:
+
+  - 使用彩色输出显示错误信息，提高可读性。
+
+- **`--extendedDiagnostics`**:
+  - 显示额外的诊断信息，如程序结构、绑定时间等。
+
+#### 配置文件操作
+
+- **`--init`**:
+
+  - 生成一个默认的 `tsconfig.json` 文件，作为项目的起点。
+
+- **`--showConfig`**:
+  - 解析并打印最终的配置结果，有助于调试配置问题。
+
+#### 其他
+
+- **`--help` 或 `-h`**:
+
+  - 显示帮助信息，列出所有可用的命令行选项。
+
+- **`--version` 或 `-v`**:
+  - 显示 TypeScript 编译器的版本号。
+
+### 示例
+
+1. **编译单个文件**
+
+   ```bash
+   tsc src/index.ts
+   ```
+
+2. **根据 tsconfig.json 编译整个项目**
+
+   ```bash
+   tsc
+   ```
+
+3. **启动监视模式**
+
+   ```bash
+   tsc --watch
+   ```
+
+4. **只生成声明文件**
+
+   ```bash
+   tsc --declaration --noEmit
+   ```
+
+5. **构建项目及其依赖**
+
+   ```bash
+   tsc --build
+   ```
+
+6. **清理增量编译缓存**
+
+   ```bash
+   tsc --build --clean
+   ```
+
+7. **生成默认配置文件**
+
+   ```bash
+   tsc --init
+   ```
+
+8. **查看解析后的配置**
+
+   ```bash
+   tsc --showConfig
+   ```
+
+9. **显示详细的诊断信息**
+   ```bash
+   tsc --extendedDiagnostics
+   ```
+
+这些命令和选项可以帮助你更灵活地管理 TypeScript 项目的编译流程。对于大多数项目来说，使用 `tsconfig.json` 来集中管理编译选项是最推荐的做法，但在某些情况下，直接使用命令行选项可以提供更大的灵活性。

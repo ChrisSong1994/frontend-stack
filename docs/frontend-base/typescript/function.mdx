@@ -1,0 +1,115 @@
+# 函数类型
+在 TypeScript 中创建函数类型可以通过多种方式来实现，具体取决于你想要定义的函数签名的复杂程度。以下是几种常见的方法来定义函数类型：
+
+### 1. 使用函数类型别名（`type`）
+
+你可以使用 `type` 关键字来定义一个函数类型的别名。这种方式非常直接且易于理解。
+
+```typescript
+// 定义一个简单的函数类型别名
+type GreetFunction = (name: string) => string;
+
+// 使用该类型定义一个函数
+const greet: GreetFunction = (name) => {
+  return `Hello, ${name}!`;
+};
+```
+
+### 2. 使用接口（`interface`）
+
+虽然通常接口用于描述对象的形状，但它们也可以用来定义函数类型。这对于需要扩展或合并多个接口的情况特别有用。
+
+```typescript
+// 使用接口定义函数类型
+interface GreetFunction {
+  (name: string): string;
+}
+
+// 实现接口
+const greet: GreetFunction = function(name) {
+  return `Hello, ${name}!`;
+};
+```
+
+### 3. 直接在变量声明中定义函数类型
+
+如果你只需要为单个函数定义类型，可以直接在函数声明时指定参数和返回值的类型。
+
+```typescript
+// 直接在函数声明中定义类型
+const greet = (name: string): string => {
+  return `Hello, ${name}!`;
+};
+```
+
+### 4. 带有多个参数和返回值的函数类型
+
+对于具有多个参数和/或复杂返回类型的函数，可以在定义时明确指出每个参数的类型和返回值的类型。
+
+```typescript
+// 多个参数和返回值类型
+type MathOperation = (a: number, b: number) => number;
+
+const add: MathOperation = (a, b) => a + b;
+const subtract: MathOperation = (a, b) => a - b;
+```
+
+### 5. 可选参数、默认参数和剩余参数
+
+TypeScript 支持可选参数（用 `?` 标记）、默认参数以及剩余参数（用 `...` 标记），这些都可以在函数类型定义中体现出来。
+
+```typescript
+// 可选参数
+type GreetFunctionOptional = (name?: string) => string;
+
+const greetOptional: GreetFunctionOptional = (name = "Guest") => {
+  return `Hello, ${name}!`;
+};
+
+// 默认参数
+const greetDefault = (name: string = "Guest"): string => {
+  return `Hello, ${name}!`;
+};
+
+// 剩余参数
+type Logger = (...args: any[]) => void;
+
+const log: Logger = (...args) => {
+  console.log(args);
+};
+```
+
+### 6. 函数重载
+
+有时候你可能希望一个函数能够接受不同类型的参数并返回不同的结果。这可以通过函数重载来实现。
+
+```typescript
+// 函数重载
+function makeDate(timestamp: number): Date;
+function makeDate(year: number, month: number, day: number): Date;
+function makeDate(...args: number[]): Date {
+  if (args.length === 1) {
+    return new Date(args[0]);
+  } else {
+    return new Date(args[0], args[1], args[2]);
+  }
+}
+
+// 调用重载函数
+const d1 = makeDate(1234567890000);
+const d2 = makeDate(2020, 10, 1);
+```
+
+### 7. 泛型函数类型
+
+当你的函数需要处理多种数据类型时，可以使用泛型来增强灵活性。
+
+```typescript
+// 泛型函数类型
+type Identity<T> = (arg: T) => T;
+
+const identityString: Identity<string> = (arg) => arg;
+const identityNumber: Identity<number> = (arg) => arg;
+```
+
+通过以上几种方式，你可以根据具体的场景选择最适合的方式来定义函数类型。每种方法都有其特点，可以根据项目的需求和个人偏好灵活运用。

@@ -2,7 +2,12 @@
 
 导航指引到有用的工具和资源。
 
-## 基础知识
+## Awesome List
+- [awesome](https://github.com/sindresorhus/awesome): 😎 Awesome lists about all kinds of interesting topics
+- [awesome-javascript](https://github.com/sorrycc/awesome-javascript): 🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
+
+
+## 基础文档站点
 
 - [MDN](https://developer.mozilla.org/zh-CN/): MDN 是 Mozilla 的开发者文档网站，提供了有关 Web 开发、JavaScript、CSS、HTML、DOM 和 Web 标准的信息。
 - [W3School](https://www.w3school.com.cn/): W3School 是一个在线学习网站，提供了有关 HTML、CSS、JavaScript、SQL、PHP、Python 等编程语言的信息。
@@ -68,3 +73,12 @@
 - [Git](https://git-scm.com/): Git 是一个用于版本控制的工具。
 - [GitHub](https://github.com/): GitHub 是一个用于托管代码的网站。
 - [Docker](https://www.docker.com/): Docker 是一个用于构建、分发和运行容器的开源平台。
+
+
+## 社区
+
+
+## 博客
+- [张鑫旭博客](https://www.zhangxinxu.com/wordpress/)
+- [阮一峰博客](https://www.ruanyifeng.com/blog/)
+- [云谦的博客](https://sorrycc.com/)
