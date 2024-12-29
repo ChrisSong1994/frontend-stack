@@ -9,11 +9,7 @@
     "link": "./frontend-base",
     "activeMatch": "/frontend-base"
   },
-  {
-    "text": "微服务",
-    "link": "./micro-app",
-    "activeMatch": "/micro-app"
-  },
+  
   {
     "text": "工程化",
     "link": "./enginering",
