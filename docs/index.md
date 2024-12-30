@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: 开始吧
-      link: /guide/
+      link: /navigator/
     - theme: alt
       text: GitHub
       link: https://github.com/ChrisSong1994/frontend-stack
