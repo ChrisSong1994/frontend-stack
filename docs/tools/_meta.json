@@ -1,0 +1,22 @@
+[
+  {
+    "type": "dir",
+    "name": "git",
+    "label": "Git"
+  },
+  {
+    "type": "dir",
+    "name": "docker",
+    "label": "Docker"
+  },
+  {
+    "type": "dir",
+    "name": "nginx",
+    "label": "Nginx"
+  },
+  {
+    "type": "dir",
+    "name": "mysql",
+    "label": "Mysql"
+  }
+]

@@ -49,5 +49,10 @@
     "text": "解决方案",
     "link": "./solution",
     "activeMatch": "/solution"
+  },
+  {
+    "text": "工具",
+    "link": "./tools",
+    "activeMatch": "/tools"
   }
 ]

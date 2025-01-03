@@ -5,6 +5,7 @@
 ## Awesome List
 - [awesome](https://github.com/sindresorhus/awesome): 😎 Awesome lists about all kinds of interesting topics
 - [awesome-javascript](https://github.com/sorrycc/awesome-javascript): 🐢 A collection of awesome browser-side JavaScript libraries, resources and shiny things.
+- [awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs):⚡ Delightful Node.js packages and resources
 
 
 ## 基础文档站点
