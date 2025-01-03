@@ -9,7 +9,6 @@
     "link": "./frontend-base",
     "activeMatch": "/frontend-base"
   },
-  
   {
     "text": "工程化",
     "link": "./enginering",
@@ -17,11 +16,11 @@
     "items": [
       {
         "text": "Babel",
-        "link": "./enginering/babel"
+        "link": "./enginering/babel/index"
       },
       {
         "text": "Npm",
-        "link": "./enginering/npm"
+        "link": "./enginering/npm/index"
       }
     ]
   },
