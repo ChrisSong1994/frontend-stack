@@ -18,5 +18,15 @@
     "type": "dir",
     "name": "mysql",
     "label": "Mysql"
+  },
+  {
+    "type": "dir",
+    "name": "redis",
+    "label": "Redis"
+  },
+  {
+    "type": "dir",
+    "name": "vpn",
+    "label": "Vpn"
   }
 ]
