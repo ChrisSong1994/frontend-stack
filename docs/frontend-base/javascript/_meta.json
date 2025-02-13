@@ -1,0 +1,12 @@
+[
+  {
+    "type": "dir",
+    "name": "basic",
+    "label": "基础"
+  },
+  {
+    "type": "dir",
+    "name": "advance",
+    "label": "进阶"
+  }
+]

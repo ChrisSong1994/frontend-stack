@@ -1,7 +1,15 @@
 # git 总结
 > 官网：https://git-scm.com/
 
+Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
+Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
+
+Git 与常用的版本控制工具 SVN, CVS, Subversion 等不同，它采用了分布式版本库的方式，不必服务器端软件支持。
+
+
 ## 核心概念
+工作原理 / 流程：
+![](./images/git-common-flow.jpeg)
 
 - **工作目录（Working Directory）**：这是你在本地计算机上看到的工作副本。
 - **暂存区（Staging Area）**：一个临时存储区域，用于保存即将提交到本地仓库的更改。你可以选择性地将工作目录中的更改添加到暂存区中。
@@ -25,18 +33,32 @@
 
 ## 其他
 
-###  git 配置用户
-```
+###  git 配置
+
+#### 配置用户名与邮箱
+```bash
 git config --global user.name "xxx"
 git config --global user.email "xxx"
 ```
 
-### 查看日志
-git log
+#### 查看全局配置
+```bash
+git config --list
+```
 
+### 日志
+```bash
+git log
+```
+**参数**：
+- `--oneline`：显示每条提交记录的简略信息，包括提交哈希值、提交者、提交时间等。
+- `--stat`：显示每条提交记录的修改文件列表和修改行数。
+- `--graph`：显示提交记录的树状结构，方便查看提交记录的依赖关系。
+- `--all`：显示所有分支的提交记录，包括本地分支和远程分支。
 
 ### 撤销操作
 撤销操作
+- 撤销本地修改：`git checkout -- <file>`
 
 
 ### 标签管理

@@ -30,11 +30,6 @@
     "activeMatch": "/nodejs"
   },
   {
-    "text": "浏览器",
-    "link": "./browser",
-    "activeMatch": "/browser"
-  },
-  {
     "text": "跨端",
     "link": "./cross-platform",
     "activeMatch": "/cross-platform"
@@ -53,5 +48,10 @@
     "text": "工具",
     "link": "./tools",
     "activeMatch": "/tools"
+  },
+  {
+    "text": "人工智能",
+    "link": "./artificial-intelligence",
+    "activeMatch": "/artificial-intelligence"
   }
 ]

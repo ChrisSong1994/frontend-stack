@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "rspress dev",
     "build": "rspress build",
-    "preview": "rspress preview"
+    "preview": "rspress preview",
+    "docker:buildx": "docker buildx build --platform linux/amd64,linux/arm64 . --no-cache -t chrissong1994/frontend-stack:latest --push",
+    "docker:build": "docker build  . --no-cache -t chrissong1994/frontend-stack:latest "
   },
   "dependencies": {
     "rspress": "^1.38.0"

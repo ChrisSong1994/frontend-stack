@@ -28,5 +28,10 @@
     "type": "dir",
     "name": "vpn",
     "label": "Vpn"
+  },
+  {
+    "type": "dir",
+    "name": "linux",
+    "label": "Linux"
   }
 ]
