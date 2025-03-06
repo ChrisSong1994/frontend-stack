@@ -13,5 +13,10 @@
     "type": "dir",
     "name": "advance",
     "label": "进阶"
+  },
+  {
+    "type": "dir",
+    "name": "packages",
+    "label": "三方模块"
   }
 ]

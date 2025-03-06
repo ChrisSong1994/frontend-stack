@@ -1,0 +1,22 @@
+[
+  {
+    "type": "dir",
+    "name": "uni-app",
+    "label": "uni-app"
+  },
+  {
+    "type": "dir",
+    "name": "react-native",
+    "label": "react-native"
+  },
+  {
+    "type": "dir",
+    "name": "mini-app",
+    "label": "小程序"
+  },
+  {
+    "type": "dir",
+    "name": "electron",
+    "label": "electron"
+  }
+]
