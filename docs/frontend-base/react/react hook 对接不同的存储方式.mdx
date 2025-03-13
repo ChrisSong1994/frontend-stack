@@ -1,0 +1,235 @@
+# react hook 对接不同的存储方式
+
+以下是一个兼容多种存储方式的 React Hook 实现，支持 localStorage、sessionStorage、自定义存储等，并通过 TypeScript 类型定义实现通用性：
+
+```tsx
+import { useState, useEffect, useCallback } from 'react';
+
+// 存储接口类型定义
+interface StorageHandler<T> {
+  getItem: (key: string) => T | null;
+  setItem: (key: string, value: T) => void;
+  removeItem: (key: string) => void;
+}
+
+// 默认使用 localStorage
+const createDefaultStorage = <T>(): StorageHandler<T> => ({
+  getItem: (key) => {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  },
+  setItem: (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+  removeItem: (key) => {
+    localStorage.removeItem(key);
+  }
+});
+
+// 主 Hook
+function useStorage<T>(
+  key: string,
+  initialValue: T,
+  config?: {
+    storage?: StorageHandler<T>;
+    serialize?: (value: T) => string;
+    deserialize?: (value: string) => T;
+  }
+): [T, (value: T | ((val: T) => T)) => void, () => void] {
+  const {
+    storage = createDefaultStorage<T>(),
+    serialize = JSON.stringify,
+    deserialize = JSON.parse
+  } = config || {};
+
+  // 内部状态管理
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = storage.getItem(key);
+      return item !== null ? item : initialValue;
+    } catch (error) {
+      console.error('Storage read error:', error);
+      return initialValue;
+    }
+  });
+
+  // 更新存储和状态
+  const setValue = useCallback((value: T | ((val: T) => T)) => {
+    try {
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      storage.setItem(key, valueToStore);
+    } catch (error) {
+      console.error('Storage write error:', error);
+    }
+  }, [key, storedValue, storage]);
+
+  // 移除存储
+  const removeValue = useCallback(() => {
+    try {
+      storage.removeItem(key);
+      setStoredValue(initialValue);
+    } catch (error) {
+      console.error('Storage remove error:', error);
+    }
+  }, [key, initialValue, storage]);
+
+  // 监听存储变化
+  useEffect(() => {
+    const handleStorageChange = () => {
+      try {
+        const item = storage.getItem(key);
+        setStoredValue(item !== null ? item : initialValue);
+      } catch (error) {
+        console.error('Storage change handler error:', error);
+      }
+    };
+
+    // 监听原生 storage 事件（仅适用于 Web Storage）
+    if (storage === localStorage || storage === sessionStorage) {
+      window.addEventListener('storage', handleStorageChange);
+    }
+
+    return () => {
+      if (storage === localStorage || storage === sessionStorage) {
+        window.removeEventListener('storage', handleStorageChange);
+      }
+    };
+  }, [key, initialValue, storage]);
+
+  return [storedValue, setValue, removeValue];
+}
+
+export default useStorage;
+```
+
+---
+
+### 功能特性
+1. **多存储支持**：
+   - 默认使用 `localStorage`
+   - 支持传入任意符合接口的存储对象
+   - 内置 Web Storage 事件监听
+
+```jsx
+// 使用 sessionStorage
+const [sessionData, setSession] = useStorage('sessionKey', 0, {
+  storage: {
+    getItem: (key) => JSON.parse(sessionStorage.getItem(key)),
+    setItem: (key, value) => sessionStorage.setItem(key, JSON.stringify(value)),
+    removeItem: (key) => sessionStorage.removeItem(key)
+  }
+});
+
+// 使用自定义存储（如 IndexedDB）
+const indexedDbStorage = {
+  getItem: async (key) => {/* ... */},
+  setItem: async (key, value) => {/* ... */},
+  removeItem: async (key) => {/* ... */}
+};
+
+const [dbData, setDbData] = useStorage('dbKey', null, { storage: indexedDbStorage });
+```
+
+2. **类型安全**：
+   - 自动类型推断
+   - 支持复杂对象存储
+
+```tsx
+interface UserData {
+  name: string;
+  age: number;
+}
+
+// 自动推断类型为 UserData
+const [user, setUser] = useStorage<UserData>('user', { name: 'John', age: 30 });
+```
+
+3. **序列化控制**：
+   - 自定义序列化/反序列化方法
+   - 默认使用 JSON 转换
+
+```jsx
+// 使用自定义序列化
+const [binaryData, setBinary] = useStorage(
+  'binaryKey',
+  null,
+  {
+    serialize: (value) => btoa(JSON.stringify(value)),
+    deserialize: (value) => JSON.parse(atob(value))
+  }
+);
+```
+
+4. **安全容错**：
+   - 错误边界处理
+   - 存储不可用时的降级处理
+
+```jsx
+// 当存储不可用时自动降级为内存存储
+const safeStorage = {
+  getItem: (key) => {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return memoryStorage[key];
+    }
+  },
+  // ...其他方法
+};
+```
+
+---
+
+### 使用场景示例
+#### 场景 1：基础使用
+```jsx
+const [count, setCount] = useStorage('counter', 0);
+
+return (
+  <div>
+    <p>Count: {count}</p>
+    <button onClick={() => setCount(c => c + 1)}>+</button>
+    <button onClick={() => setCount(0)}>Reset</button>
+  </div>
+);
+```
+
+#### 场景 2：多标签页同步
+```jsx
+// 自动监听 storage 事件
+const [theme, setTheme] = useStorage('appTheme', 'light');
+
+useEffect(() => {
+  document.body.className = theme;
+}, [theme]);
+```
+
+#### 场景 3：服务端数据缓存
+```jsx
+const apiStorage = {
+  getItem: async (key) => {
+    const response = await fetch(`/api/cache/${key}`);
+    return response.json();
+  },
+  setItem: async (key, value) => {
+    await fetch(`/api/cache/${key}`, {
+      method: 'POST',
+      body: JSON.stringify(value)
+    });
+  }
+};
+
+const [cachedData] = useStorage('importantData', null, { storage: apiStorage });
+```
+
+---
+
+### 实现亮点
+1. **通用接口设计**：通过 `StorageHandler` 接口统一不同存储方案的操作方式
+2. **类型安全**：完整的 TypeScript 类型支持
+3. **自动同步**：内置 Web Storage 事件监听
+4. **灵活扩展**：支持自定义序列化方案和存储驱动
+5. **防御式编程**：完善的错误处理机制
+
+这个 Hook 可以轻松扩展支持更多存储类型（如 Cookies、AsyncStorage、IndexedDB 等），同时保持统一的使用接口，非常适合需要多存储方案支持或需要实现存储层抽象的 React 应用。
