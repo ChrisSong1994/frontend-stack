@@ -6,12 +6,7 @@
   },
   {
     "type": "dir",
-    "name": "react-native",
-    "label": "react-native"
-  },
-  {
-    "type": "dir",
-    "name": "mini-app",
+    "name": "hybrid-h5",
     "label": "小程序"
   },
   {
