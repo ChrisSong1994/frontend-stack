@@ -1,11 +1,13 @@
 [
-  "计算机网络体系结构",
-  "常见网络传输协议",
-  "websocket 协议",
-  "TCP 和 UDP 协议",
+  { "type": "dir", "name": "basic", "label": "基础" },
   {
     "type": "dir",
     "name": "http",
     "label": "http"
+  },
+  {
+    "type": "dir",
+    "name": "FTP",
+    "label": "FTP"
   }
 ]
