@@ -1,4 +1,8 @@
-[
+[ {
+  "type": "dir",
+  "name": "hybrid h5",
+  "label": "hybrid h5"
+},
   {
     "type": "dir",
     "name": "uni-app",
