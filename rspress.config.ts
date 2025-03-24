@@ -17,6 +17,7 @@ export default defineConfig({
   },
   route: {
     cleanUrls: true,
+    exclude: ['images'],
   },
   ssg: false,
   // 覆写主题配置

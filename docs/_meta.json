@@ -10,25 +10,16 @@
     "activeMatch": "/frontend-base"
   },
   {
-    "text": "工程化",
-    "link": "./enginering",
-    "activeMatch": "/enginering",
-    "items": [
-      {
-        "text": "Babel",
-        "link": "./enginering/babel/index"
-      },
-      {
-        "text": "Npm",
-        "link": "./enginering/npm/index"
-      }
-    ]
-  },
-  {
     "text": "Nodejs",
     "link": "./nodejs",
     "activeMatch": "/nodejs"
   },
+  {
+    "text": "工程化",
+    "link": "./enginering",
+    "activeMatch": "/enginering"
+  },
+ 
   {
     "text": "跨端",
     "link": "./cross-platform",
@@ -53,5 +44,10 @@
     "text": "人工智能",
     "link": "./artificial-intelligence",
     "activeMatch": "/artificial-intelligence"
+  },
+  {
+    "text": "算法",
+    "link": "./datastructure-algorithm",
+    "activeMatch": "/datastructure-algorithm"
   }
 ]
