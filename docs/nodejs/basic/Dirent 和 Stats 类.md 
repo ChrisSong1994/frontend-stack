@@ -1,0 +1,100 @@
+# Dirent 和 Stats 类
+在 Node.js 的文件系统模块 (`fs`) 中，`Dirent` 和 `Stats` 是两个不同的对象类型，它们的用途和提供的信息有显著区别。以下是详细对比：
+
+---
+
+### **1. Dirent 对象**
+#### **定义**  
+通过 `fs.readdir(dirPath, { withFileTypes: true })` 获取，表示目录中的 **一个条目**（文件、子目录等）。
+
+#### **核心信息**  
+```javascript
+{
+  name: 'example.txt',  // 条目名称
+  isFile: () => true,    // 是否是文件
+  isDirectory: () => false,  // 是否是目录
+  isSymbolicLink: () => false  // 是否是符号链接
+}
+```
+
+#### **特点**  
+- **轻量级**：仅提供基本类型判断方法，**不需要访问文件内容或元数据**。
+- **高性能**：获取目录列表时，直接通过文件系统返回类型信息，无需额外系统调用。
+- **适用场景**：快速筛选文件类型（如只列出目录或文件）。
+
+---
+
+### **2. Stats 对象**
+#### **定义**  
+通过 `fs.stat(filePath)` 或 `fs.lstat(filePath)` 获取，表示 **文件/目录的完整元数据**。
+
+#### **核心信息**  
+```javascript
+{
+  size: 1024,           // 文件大小（字节）
+  mtime: 2023-09-01T00:00:00.000Z,  // 最后修改时间
+  birthtime: 2023-09-01T00:00:00.000Z,  // 创建时间
+  isFile: () => true,    // 是否是文件
+  isDirectory: () => false,  // 是否是目录
+  isSymbolicLink: () => false,  // 是否是符号链接
+  mode: 0o100644,       // 文件权限
+  // 其他方法如 isSocket(), isFIFO(), 等
+}
+```
+
+#### **特点**  
+- **完整元数据**：包含文件大小、时间戳、权限等详细信息。
+- **需要系统调用**：每次调用 `fs.stat` 都会访问文件系统，性能开销较高。
+- **适用场景**：需要文件详细信息时（如获取大小、修改时间）。
+
+---
+
+### **对比表格**
+| 特性                | Dirent                          | Stats                          |
+|---------------------|---------------------------------|--------------------------------|
+| **获取方式**        | `readdir(..., { withFileTypes: true })` | `fs.stat()` 或 `fs.lstat()`    |
+| **信息量**          | 仅类型（文件/目录/符号链接）     | 完整元数据（大小、时间、权限等）|
+| **性能**            | 高（无额外系统调用）            | 低（需访问文件系统）           |
+| **主要用途**        | 快速筛选文件类型                | 获取文件详细信息               |
+
+---
+
+### **代码示例对比**
+#### 场景 1：仅需判断文件类型（使用 Dirent）
+```javascript
+const files = await fs.readdir('./', { withFileTypes: true });
+const directories = files.filter(dirent => dirent.isDirectory());
+// 高性能，无需访问文件内容
+```
+
+#### 场景 2：需要文件大小（使用 Stats）
+```javascript
+const files = await fs.readdir('./');
+const stats = await Promise.all(files.map(file => fs.stat(file)));
+const fileSizes = stats.map(stat => stat.size);
+// 需要额外系统调用，但能获取详细信息
+```
+
+---
+
+### **性能优化技巧**
+1. **组合使用**：先用 `Dirent` 过滤文件类型，再对目标文件调用 `fs.stat`，减少不必要的系统调用。
+   ```javascript
+   const dirents = await fs.readdir('./', { withFileTypes: true });
+   const files = dirents
+     .filter(dirent => dirent.isFile())
+     .map(dirent => dirent.name);
+   
+   const stats = await Promise.all(files.map(file => fs.stat(file)));
+   ```
+
+2. **符号链接处理**：  
+   - `fs.lstat()`：获取链接本身的元数据（不跟随链接）。
+   - `fs.stat()`：跟随链接，获取目标文件的元数据。
+
+---
+
+### **总结**
+- **Dirent**：轻量级类型判断，适合快速筛选。
+- **Stats**：完整元数据，适合需要详细信息的场景。
+- **最佳实践**：根据需求选择工具，避免不必要的 `fs.stat` 调用以优化性能。
