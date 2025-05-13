@@ -7,7 +7,7 @@
   },
   {
     "type": "dir",
-    "name": "FTP",
-    "label": "FTP"
+    "name": "ftp",
+    "label": "ftp"
   }
 ]
